@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Image</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('background-image.jpg');
+            background-size: cover;
+        }
+        
+        #random-image {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+    <script>
+        var countries = [
+    'Andorra', 'United Arab Emirates', 'Afghanistan', 'Antigua and Barbuda', 'Anguilla', 'Albania', 'Armenia', 'Angola', 'Antarctica', 'Argentina',
+    'American Samoa', 'Austria', 'Australia', 'Aruba', 'Åland Islands', 'Azerbaijan', 'Bosnia and Herzegovina', 'Barbados', 'Bangladesh', 'Belgium',
+    'Burkina Faso', 'Bulgaria', 'Bahrain', 'Burundi', 'Benin', 'Saint Barthélemy', 'Bermuda', 'Brunei Darussalam', 'Bolivia', 'Brazil',
+    'Bahamas', 'Bhutan', 'Botswana', 'Belarus', 'Belize', 'Canada', 'Cocos (Keeling) Islands', 'Central African Republic', 'Switzerland', 'Côte dIvoire',
+    'Cook Islands', 'Chile', 'Cameroon', 'China', 'Colombia', 'Costa Rica', 'Cuba', 'Cape Verde', 'Curaçao', 'Christmas Island',
+    'Cyprus', 'Czech Republic', 'Germany', 'Djibouti', 'Denmark', 'Dominica', 'Dominican Republic', 'Algeria', 'Ecuador', 'Estonia',
+    'Egypt', 'Western Sahara', 'Eritrea', 'Spain', 'Ethiopia', 'Finland', 'Fiji', 'Falkland Islands (Malvinas)', 'Micronesia', 'Faroe Islands',
+    'France', 'Gabon', 'United Kingdom', 'Grenada', 'Georgia', 'French Guiana', 'Guernsey', 'Ghana', 'Gibraltar', 'Greenland',
+    'Gambia', 'Guinea', 'Guadeloupe', 'Equatorial Guinea', 'Greece', 'South Georgia and the South Sandwich Islands', 'Guatemala', 'Guam', 'Guinea-Bissau', 'Guyana',
+    'Hong Kong', 'Heard Island and McDonald Islands', 'Croatia', 'Haiti', 'Hungary', 'Indonesia', 'Ireland', 'Israel', 'Isle of Man',
+    'India', 'Iraq', 'Iran', 'Iceland', 'Italy', 'Jersey', 'Jamaica', 'Jordan', 'Japan', 'Kenya',
+    'Kyrgyzstan', 'Cambodia', 'Kiribati', 'Comoros', 'Saint Kitts and Nevis', 'North Korea', 'South Korea', 'Kuwait', 'Cayman Islands', 'Kazakhstan',
+    'Laos', 'Lebanon', 'Saint Lucia', 'Liechtenstein', 'Sri Lanka', 'Liberia', 'Lesotho', 'Lithuania', 'Luxembourg', 'Latvia',
+    'Libya', 'Morocco', 'Monaco', 'Moldova', 'Montenegro', 'Madagascar', 'Marshall Islands', 'North Macedonia', 'Mali', 'Myanmar',
+    'Mongolia', 'Macao', 'Northern Mariana Islands', 'Martinique', 'Mauritania', 'Montserrat', 'Malta', 'Mauritius', 'Maldives', 'Malawi',
+    'Mexico', 'Malaysia', 'Mozambique', 'Namibia', 'New Caledonia', 'Niger', 'Norfolk Island', 'Nigeria', 'Nicaragua', 'Netherlands',
+    'Norway', 'Nepal', 'Nauru', 'Niue', 'New Zealand', 'Oman', 'Panama', 'Peru', 'French Polynesia', 'Papua New Guinea',
+    'Philippines', 'Pakistan', 'Poland', 'Saint Pierre and Miquelon', 'Pitcairn', 'Puerto Rico', 'Palestinian Territory', 'Portugal', 'Palau', 'Paraguay',
+    'Qatar', 'Réunion', 'Romania', 'Serbia', 'Russian Federation', 'Rwanda', 'Saudi Arabia', 'Solomon Islands', 'Seychelles', 'Sudan',
+    'Sweden', 'Singapore', 'Saint Helena', 'Slovenia', 'Svalbard and Jan Mayen Islands', 'Slovakia', 'Sierra Leone', 'San Marino', 'Senegal', 'Somalia',
+    'Suriname', 'South Sudan', 'Sao Tome and Principe', 'El Salvador', 'Sint Maarten (Dutch part)', 'Syrian Arab Republic', 'Eswatini', 'Turks and Caicos Islands', 'Chad', 'French Southern Territories',
+    'Togo', 'Thailand', 'Tajikistan', 'Tokelau', 'Timor-Leste', 'Turkmenistan', 'Tunisia', 'Tonga', 'Turkey', 'Trinidad and Tobago',
+    'Tuvalu', 'Taiwan', 'Tanzania', 'Ukraine', 'Uganda', 'United States Minor Outlying Islands', 'United States of America', 'Uruguay', 'Uzbekistan', 'Holy See',
+    'Saint Vincent and the Grenadines', 'Venezuela', 'Virgin Islands (British)', 'Virgin Islands (U.S.)', 'Viet Nam', 'Vanuatu', 'Wallis and Futuna Islands', 'Samoa', 'Yemen', 'Mayotte',
+    'South Africa', 'Zambia', 'Zimbabwe'
+]
+
+var images = [
+    'ad.png', 'ae.png', 'af.png', 'ag.png', 'ai.png', 'al.png', 'am.png', 'ao.png', 'aq.png', 'ar.png',
+    'as.png', 'at.png', 'au.png', 'aw.png', 'ax.png', 'az.png', 'ba.png', 'bb.png', 'bd.png', 'be.png',
+    'bf.png', 'bg.png', 'bh.png', 'bi.png', 'bj.png', 'bl.png', 'bm.png', 'bn.png', 'bo.png', 'br.png',
+    'bs.png', 'bt.png', 'bw.png', 'by.png', 'bz.png', 'ca.png', 'cc.png', 'cf.png', 'ch.png', 'ci.png',
+    'ck.png', 'cl.png', 'cm.png', 'cn.png', 'co.png', 'cr.png', 'cu.png', 'cv.png', 'cw.png', 'cx.png',
+    'cy.png', 'cz.png', 'de.png', 'dj.png', 'dk.png', 'dm.png', 'do.png', 'dz.png', 'ec.png', 'ee.png',
+    'eg.png', 'eh.png', 'er.png', 'es.png', 'et.png', 'fi.png', 'fj.png', 'fk.png', 'fm.png', 'fo.png',
+    'fr.png', 'ga.png', 'gb.png', 'gd.png', 'ge.png', 'gf.png', 'gg.png', 'gh.png', 'gi.png', 'gl.png',
+    'gm.png', 'gn.png', 'gp.png', 'gq.png', 'gr.png', 'gs.png', 'gt.png', 'gu.png', 'gw.png', 'gy.png',
+    'hk.png', 'hm.png', 'hr.png', 'ht.png', 'hu.png', 'id.png', 'ie.png', 'il.png', 'im.png', 'in.png',
+    'iq.png', 'ir.png', 'is.png', 'it.png', 'je.png', 'jm.png', 'jo.png', 'jp.png', 'ke.png', 'kg.png',
+    'kh.png', 'ki.png', 'km.png', 'kn.png', 'kp.png', 'kr.png', 'kw.png', 'ky.png', 'kz.png', 'la.png',
+    'lb.png', 'lc.png', 'li.png', 'lk.png', 'lr.png', 'ls.png', 'lt.png', 'lu.png', 'lv.png', 'ly.png',
+    'ma.png', 'mc.png', 'md.png', 'me.png', 'mg.png', 'mh.png', 'mk.png', 'ml.png', 'mm.png', 'mn.png',
+    'mo.png', 'mp.png', 'mq.png', 'mr.png', 'ms.png', 'mt.png', 'mu.png', 'mv.png', 'mw.png', 'mx.png',
+    'my.png', 'mz.png', 'na.png', 'nc.png', 'ne.png', 'nf.png', 'ng.png', 'ni.png', 'nl.png', 'no.png',
+    'np.png', 'nr.png', 'nu.png', 'nz.png', 'om.png', 'pa.png', 'pe.png', 'pf.png', 'pg.png', 'ph.png',
+    'pk.png', 'pl.png', 'pm.png', 'pn.png', 'pr.png', 'ps.png', 'pt.png', 'pw.png', 'py.png', 'qa.png',
+    're.png', 'ro.png', 'rs.png', 'ru.png', 'rw.png', 'sa.png', 'sb.png', 'sc.png', 'sd.png', 'se.png',
+    'sg.png', 'sh.png', 'si.png', 'sj.png', 'sk.png', 'sl.png', 'sm.png', 'sn.png', 'so.png', 'sr.png',
+    'ss.png', 'st.png', 'sv.png', 'sx.png', 'sy.png', 'sz.png', 'tc.png', 'td.png', 'tf.png', 'tg.png',
+    'th.png', 'tj.png', 'tk.png', 'tl.png', 'tm.png', 'tn.png', 'to.png', 'tr.png', 'tt.png', 'tv.png',
+    'tw.png', 'tz.png', 'ua.png', 'ug.png', 'um.png', 'us.png', 'uy.png', 'uz.png', 'va.png', 'vc.png',
+    've.png', 'vg.png', 'vi.png', 'vn.png', 'vu.png', 'wf.png', 'ws.png', 'ye.png', 'yt.png', 'za.png',
+    'zm.png', 'zw.png']
+
+        var updatedImages = [];
+        for (let i = 0; i < images.length; i++) {
+            const abbreviation = images[i].split('.')[0];
+            const countryIndex = countries.findIndex(country => country.toLowerCase().startsWith(abbreviation.toLowerCase()));
+            if (countryIndex !== -1) {
+                updatedImages.push(images[i]);
+            }
+        }
+
+        var shownImages = [...images];
+        var score = 0;
+        var globalIndex;
+
+        function getRandomImage() {
+            if (shownImages.length == 0) {
+                shownImages = [...images];
+            }
+            var index = Math.floor(Math.random() * shownImages.length);
+            globalIndex = index;
+            var randomImage = shownImages[index];
+            shownImages.splice(index, 1);
+            return randomImage;
+        }
+
+        function getRandomCountry() {
+            var index = globalIndex;
+            return countries[index];
+        }
+
+        function showRandomImage() {
+            var randomImage = getRandomImage();
+            var imagePath = 'png250px/' + randomImage;
+
+            var imageElement = document.getElementById('random-image');
+            imageElement.src = imagePath;
+        }
+
+        function checkCountry() {
+    var countryInput = document.getElementById('country-input').value;
+    var randomCountry = getRandomCountry();
+    var randomCountryIndex = countries.indexOf(randomCountry);
+
+    if (compareCountryIndexes(countryInput, randomCountry)) {
+        alert('Correct!');
+        score++;
+        document.getElementById('score').textContent = score;
+    } else {
+        alert('Incorrect! The correct country was: ' + randomCountry);
+    }
+
+    resetInput();
+    showRandomImage();
+
+    document.getElementById('check-button').disabled = false;
+    document.getElementById('move-on-button').disabled = false;
+}
+
+
+
+        function compareCountryIndexes(index1, index2) {
+            return index1 == index2;
+        }
+
+        function resetInput() {
+            document.getElementById('country-input').value = '';
+        }
+
+        function endGame() {
+            document.getElementById('country-input').disabled = true;
+            document.getElementById('check-button').disabled = true;
+            document.getElementById('move-on-button').disabled = true;
+        }
+
+        function moveOn() {
+            score++;
+            document.getElementById('score').textContent = score;
+            resetInput();
+            showRandomImage();
+        }
+
+        // Call showRandomImage() when the page is loaded
+        window.onload = showRandomImage;
+    </script>
+</head>
+<body>
+    <img id="random-image" alt="Random Image" />
+
+    <div>
+        <input type="text" id="country-input" placeholder="Enter the country" />
+        <button id="check-button" onclick="checkCountry()">Check</button>
+        <button id="move-on-button" onclick="moveOn()">I am Correct</button>
+    </div>
+
+    <p>Score: <span id="score">0</span></p>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GEO GUESSER</title>
+    <style>
+        .game-description {
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        function goToTargetPage() {
+            window.location.href = "game.html";
+        }
+    </script>
+</head>
+<body>
+    <p class="game-description">A game where players try to gather as many points as possible to see if they are truly good at geography. Player is displayed a picture of a random flag where they must correctly spell the country's name. If the player guesses the country correctly, they earn a point and are presented another country. If the player guesses the flag incorrectly, the game ends and the player's score is returned.</p>
+    <button type="button" onclick="goToTargetPage()" style="position: absolute; left: 80%; top: 80%; transform: translate(-50%, -50%); border: bold; color: black; background-color: cyan; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 30px; margin: 10px 5px; cursor: pointer;">Play</button>
+</body>
+</html>
